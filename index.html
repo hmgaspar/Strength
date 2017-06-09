@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Bare - Start Bootstrap Template</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <style>
+    body {
+        padding-top: 70px;
+        /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+    }
+    </style>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">Ship Structure</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="about.html">About</a>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-6 text-left">
+            <h2>Ship Data</h2>
+            <p>Lenght (m): <input type=text id="L"><input type="range" id="rL" min = 10 value = 112 max = 300 step = 1 oninput = "calc_str()"></p>
+            <p>Breadth (m): <input type=text id="B"><input type="range" id="rB" min = 10 value = 22 max = 100 step = 1 oninput = "calc_str()"></p>
+            <p>Depth (m): <input type=text id="D"><input type="range" id="rD" min = 10 value = 11 max = 50 step = 1 oninput = "calc_str()"></p>
+            <p>Draft (m) : <span id="Dr"></span></p>
+            <p>Block Coeffic:  <input type=text id="Cb"><input type="range" id="rCb" min = 0 value = 0.67 max = 1 step = 0.01 oninput = "calc_str()"></p>
+            <p>Lightweight (ton): <input type=text id="Lw"><input type="range" id="rLw" min = 500 value = 6000 max = 10000 step = 1 oninput = "calc_str()"></p>
+            <p>Deadweight (ton): <input type=text id="Dw"><input type="range" id="rDw" min = 500 value = 6628 max = 10000 step = 1 oninput = "calc_str()"></p>
+            <p>Displacement (ton) : <span id="Disp"></span></p>
+            <p>Stiffener Distance (mm): <input type=text id="Sd"><input type="range" id="rSd" min = 400 value = 700 max = 800 step = 10 oninput = "calc_str()"></p>
+            <p>Girder Distance (mm) :<input type=text id="Gd"><input type="range" id="rGd" min = 1200 value = 2100 max = 3000 step = 100 oninput = "calc_str()"></p>
+            <p>DAF <input type=text id="DAF"><input type="range" id="rDAF" min = 1 value = 1.3 max = 3 step = 0.1 oninput = "calc_str()"></p>
+            <h2> Local Strength of Bottom Plating</h2>
+            <p>Pressure (N/mm^2): <span id="Pr"></span></p>
+            <h3>Stiffener</h3>
+            <p>Section Modulus (cm^3): <span id="Z"></span></p>
+            <p>Inertia (cm^4): <span id="I"></span></p>
+            <p>Profile (mm) : <span id="Px"></span>x<span id="Py"></span></p>
+            <h3>Girder</h3> 
+            <p>Section Modulus (cm^3): <span id="Zg"></span></p>
+            <h3>Plate</h3>
+            <p>Plate Thickness (mm): <span id="t"></span></p>
+            <p>Equivalent Plate Thickness (mm): <span id="teq"></span></p>
+            <p>Inertia (mm^4): <span id="InertPlat"></span></p>
+            <p>Section Modulus (cm^3): <span id="ZPlat"></span></p>
+            </div>
+            <div class="col-md-6 text-left">
+            <h2>Global Strength</h2>
+            <p>Ship Divisions (tanks): <input type=text id="ShipTanks"><input type="range" id="rShipTanks" min = 2 value = 8 max = 10 step = 2 oninput = "calc_str()"></p>
+            <p>Number of tanks with load: <input type=text id="LoadTanks"><input type="range" id="rLoadtanks" min = 2 value = 4 max = 10 step = 2 oninput = "calc_str()"></p>
+            <p>Buoyancy (ton/m): <span id="Buo"></span></p>
+            <p>Lightweight Distributed (ton/m): <span id="LwD"></span></p>
+            <p>Deadweight Distributed (ton/m): <span id="DwD"></span></p>
+            <p> The deadweight is distributed in the outer tanks in bow and stern. </p>
+            <h3>Resulting Load</h3>
+            <p>Load Full Tanks (ton/m): <span id="ResLoadFull"></span></p>
+            <p>Load Empty Tanks (ton/m): <span id="ResLoadEmpty"></span></p>
+            <p>Established conditions: Always hogging.</p>
+            <p>Maximum Force (N*m): <span id="MaxFor"></span></p>
+            <p>Maximum Moment (MN*m): <span id="MaxMom"></span></p>
+            <h3>DNV Rules</h3>
+            <p>Wave Coefficient (Cw) : <span id="Cw"></span></p>
+            <p>Stillwater Bending Moment (kN*m): <span id="MSO"></span></p>
+            <p>Wave Bending Moment (kN*m): <span id="MWO"></span></p>
+            <p>Worst case scenario, seagoing condition.</p>
+            <h3>Strenght Evaluation</h3>
+            <p>Stillwater Bending Moment (kN*m): <span id="MaxMSO"></span></p>
+            <p>Total Bending Moment (kN*m): <span id="TotMom"></span></p>
+            <p>Midship Section Modulus (cm^3): <span id="SecMod"></span></p>
+            <h3>Conclusion: <span id="Final"></span></h3>
+            </div>
+            <div class="col-md-12 text-left" id="myDiv" style=" width: 800px; height: 600px"></div>
+            
+        </div>
+        <!-- /.row -->
+
+    </div>
+    <!-- /.container -->
+
+    <!-- script -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+    <script src="strength.js"></script>
+    
+    <!-- jQuery Version 1.11.1 -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+</body>
+
+</html>
